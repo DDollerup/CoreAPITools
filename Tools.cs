@@ -28,7 +28,7 @@ public static class Tools
                     break;
             }
 
-            var filePath = saveToPath + (fileName == null ? Guid.NewGuid() + fileType : fileName + fileType);
+            var filePath = saveToPath + @"\" + (fileName == null ? Guid.NewGuid() + fileType : fileName + fileType);
             System.IO.File.WriteAllBytes(filePath, base64array);
             return System.IO.Path.GetFileName(filePath);
         }
