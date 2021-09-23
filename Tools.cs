@@ -34,11 +34,19 @@ public static class Tools
         }
         return null;
     }
-    public static bool DeleteFile(string filePath)
+
+    public static bool IsBase64String(string base64)
     {
-        if (System.IO.File.Exists(filePath))
+        Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
+        return Convert.TryFromBase64String(base64, buffer, out int bytesParsed);
+    }
+
+    public static bool DeleteFile(string filePath, string fileName)
+    {
+        string _fileName = System.IO.Path.GetFileName(fileName);
+        if (System.IO.File.Exists(filePath + _fileName))
         {
-            System.IO.File.Delete(filePath);
+            System.IO.File.Delete(filePath + _fileName);
             return true;
         }
         return false;
